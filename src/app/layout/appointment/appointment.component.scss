@@ -1,0 +1,39 @@
+@import "../../../assets/scss/varibles";
+.appointment {
+  .nav {
+    padding: 16px 26px;
+    h3 {
+      font-size: 32px;
+      font-weight: 700;
+    }
+    .icons {
+      margin-right: 24px;
+    }
+  }
+  .text-heading {
+    font-size: 14px;
+    color: $gray-color;
+  }
+
+  .note {
+    font-size: 12px;
+  }
+
+  .des {
+    font-size: 11px;
+  }
+  .svgBg {
+    width: 20px !important;
+    height: 20px !important;
+    background-color: #fff;
+    border-radius: 50%;
+    border-color: 1px solid $gray-color;
+  }
+
+  .bgGray {
+    background-color: #92a1ad;
+  }
+  .time {
+    color: $primary-text-color;
+  }
+}

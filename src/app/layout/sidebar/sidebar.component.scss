@@ -1,0 +1,37 @@
+@import "../../../assets/scss/varibles";
+
+.admin-sidebar {
+    width: 135px;
+    position: fixed;
+    height: 100vh;
+    background-color: #fff;
+    top: 0;
+  
+  
+    .logo {
+      padding: 20px;
+      display: flex;
+      height: 80px;
+  
+      i {
+        font-size: 2rem;
+        margin: 0 auto;
+      }
+    }
+
+    ul li a {
+        .svgCard{
+
+    
+            .active{
+                background-color: $primary-color;
+                width: 46px;
+                height: 46px;
+                border-radius: 10px;
+            }
+        }
+    }
+     span{
+        font-size: 12px;
+     }
+}  

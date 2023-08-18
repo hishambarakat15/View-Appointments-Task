@@ -1,0 +1,36 @@
+/* You can add global styles to this file, and also import other style files */
+
+/* Importing Bootstrap SCSS file. */
+@import "bootstrap/scss/bootstrap";
+@import "primeicons/primeicons.css";
+@import "~primeicons/primeicons.css";
+@font-face {
+  font-family: "main-font";
+  src: url(./assets/fonts/timesnewroman.ttf);
+}
+
+* {
+  font-family: "main-font" !important;
+  direction: rtl;
+}
+
+.p-card .p-card-title {
+  font-size: 16px;
+}
+
+.p-panel .p-panel-content {
+  padding: 0px !important;
+}
+
+.pi {
+  font-family: "primeicons" !important;
+}
+
+.bg-secondary {
+  background-color: #92a1ad1a !important;
+  color: #92a1ad !important;
+}
+
+p-button-raised {
+  width: 50px;
+}
