@@ -10,45 +10,63 @@ import { AppointmentsService } from 'src/app/core/Services/appointments.service'
   styleUrls: ['./appointment.component.scss'],
 })
 export class AppointmentComponent implements OnInit {
-  categories$ = this._appointmentService.categories$;
 
-  availableProducts$ = this._appointmentService.appointments$;
+  availableProducts!: IAppointment[];
 
-  selectedProducts: IAppointment[] | undefined;
+  selectedProducts!: IAppointment[]
 
   draggedProduct: IAppointment | undefined | null;
 
+  categories$ = this._appointmentService.categories$;
+  sourceCategoryCode: string | null = null;
+
+
   FirstRandomColor: string;
   SecondRandomColor: string;
-  //
+ 
+  product: IAppointment[] = [];
 
-  product: any[] = [];
 
-  availableProducts: any[] | undefined;
   constructor(private _appointmentService: AppointmentsService) {
     this.FirstRandomColor = this.getRandomColor();
     this.SecondRandomColor = this.getRandomColor();
   }
-
-  //
-
-  getAppointmentsByCategory(categoryCode: string): any[] {
-    return this.product.filter(
-      (appointment) => appointment.Category_Code === categoryCode
-    );
-  }
-
-  ngOnInit(): void {
+  ngOnInit() {
     this.selectedProducts = [];
-    this,
-      this._appointmentService.appointments$.subscribe(
-        (data) => (this.product = data)
-      );
-  }
+  
 
-  dragStart(product: IAppointment) {
-    this.draggedProduct = product;
-  }
+    this._appointmentService.appointments$.subscribe(
+      (data) => (this.availableProducts = data)
+    );
+}
+
+
+getAppointmentsByCategory(categoryCode: string): IAppointment[] {
+  return this.availableProducts.filter(
+    (appointment) => appointment.Category_Code === categoryCode
+  );
+}
+getSelectedProductByCategory(categoryCode: string): IAppointment[] {
+  return this.selectedProducts.filter(
+    (appointment) => appointment.Category_Code === categoryCode
+  );
+}
+
+dragStart(product: any, sourceCategoryCode: string) {
+  this.draggedProduct = { ...product };
+  this.sourceCategoryCode = sourceCategoryCode;
+}
+
+
+  drop(targetCategoryCode: string) {
+    if (this.draggedProduct) {
+        let draggedProductIndex = this.findIndex(this.draggedProduct);
+        this.draggedProduct.Category_Code = targetCategoryCode; 
+        this.selectedProducts = [...(this.selectedProducts as any[]), this.draggedProduct];
+        this.availableProducts = this.availableProducts?.filter((val, i) => i !== draggedProductIndex);
+        this.draggedProduct = null;
+    }
+}
 
   dragEnd() {
     this.draggedProduct = null;
@@ -64,30 +82,18 @@ export class AppointmentComponent implements OnInit {
     return color;
   }
 
-  //
-
-  drop() {
-    if (this.draggedProduct) {
-      let draggedProductIndex = this.findIndex(this.draggedProduct);
-      this.selectedProducts = [
-        ...(this.selectedProducts as any[]),
-        this.draggedProduct,
-      ];
-      this.availableProducts = this.availableProducts?.filter(
-        (val, i) => i != draggedProductIndex
-      );
-      this.draggedProduct = null;
-    }
-  }
-
+  
   findIndex(product: any) {
     let index = -1;
     for (let i = 0; i < (this.availableProducts as any[]).length; i++) {
-      if (product.id === (this.availableProducts as any[])[i].id) {
-        index = i;
-        break;
-      }
+        if (product.Cod === (this.availableProducts as any[])[i].id) {
+            index = i;
+            break;
+        }
     }
     return index;
-  }
+}
+
+
+ 
 }

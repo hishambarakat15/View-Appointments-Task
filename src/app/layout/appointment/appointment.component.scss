@@ -15,6 +15,17 @@
     color: $gray-color;
   }
 
+
+  .content{
+    h3{
+      font-size: 16px;
+      font-weight: 600;
+
+      span{
+        margin-left: 44px;
+      }
+    }
+  }
   .note {
     font-size: 12px;
   }
